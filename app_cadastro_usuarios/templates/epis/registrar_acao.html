@@ -1,0 +1,51 @@
+{% extends 'usuarios/base.html' %}
+
+{% block conteudo %}
+<div class="container mt-4 rounded p-4 shadow" style="max-width: 500px; background-color: #4f4f4f;">  <!-- Container com estilo -->
+    <h2 style="color: white; text-decoration: underline; text-align: left; margin-left: 0;">Registrar Ação</h2>
+    <form method="POST" action="{% url 'registrar_acao' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label" style="font-size: 14px">Equipamento </label>
+            {{ form.nome_equipamento }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label" style="font-size: 14px">Colaborador </label>
+            {{ form.usuario }}
+        </div>
+
+        <div class="mb-3 d-flex">  <!-- Div para alinhar os inputs de data -->
+            <div class="flex-grow-1 me-2">  <!-- Input com margem à direita -->
+                <label for="data_emprestimo" class="form-label" style="font-size: 14px">Data do empréstimo</label>
+                <input type="date" class="form-control" id="data_emprestimo" name="data_emprestimo" required>
+            </div>
+            <div class="flex-grow-1"> <!-- Segundo input de data -->
+                <label for="data_prevista_devolucao" class="form-label" style="font-size: 14px">Data prevista da devolução</label>
+                <input type="date" class="form-control" id="data_prevista_devolucao" name="data_prevista_devolucao" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label" style="font-size: 14px">Status</label>
+            <select class="form-select" id="status" name="status" required>
+                <option value="emprestado">Emprestado</option>
+                <option value="devolvido">Devolvido</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="condicao_emprestimo" class="form-label" style="font-size: 14px">Condições do equipamento no empréstimo</label>  <!-- Label alterado -->
+            <input type="text" class="form-control" id="condicao_emprestimo" name="condicao_emprestimo" required>
+        </div>
+        <div class="mb-3">
+            <label for="data_devolucao" class="form-label" style="font-size: 14px">Data da devolução</label>
+            <input type="date" class="form-control" id="data_devolucao" name="data_devolucao">
+        </div>
+        <div class="mb-3">
+            <label for="observacao_devolucao" class="form-label" style="font-size: 14px">Observação na devolução/perda</label> <!-- Label alterado -->
+            <textarea class="form-control" id="observacao_devolucao" name="observacao_devolucao" rows="3"></textarea>
+        </div>
+        <button name="save-button"type="submit" class="login-btn">SALVAR</button> <!-- Botão com estilo -->
+    </form>
+</div>
+{% endblock %}

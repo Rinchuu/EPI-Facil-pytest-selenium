@@ -1,0 +1,29 @@
+{% extends 'usuarios/base.html' %}
+{% block conteudo %}
+<div class="container mt-5">
+    <h1>Editar Usuário</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" value="{{ epi.nome }}" required>
+
+        <label for="quantidade">Quantidade:</label>
+        <input type="quantidade" name="quantidade" value="{{ epi.quantidade }}" required>
+
+        <label for="valor">Valor:</label>
+        <input type="valor" name="valor" value="{{ epi.valor }}" required>
+
+        <button type="submit" class="btn btn-danger btn-sm">Salvar</button>
+    </form>
+
+    <a href="{% url 'listar_epis' %}">Voltar para a lista de Epis</a>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{% if message.tags %} {{ message.tags }} {% endif %}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'usuarios/base.html' %}
+<title>Usuarios!</title>
+{% block conteudo %}
+<div class="container">
+    <h1>Lista de Epis</h1>
+
+    <form method="GET" action="{% url 'listar_epis' %}">
+        <div class="input-group mb-3">
+            <input type="text" name="busca" class="form-control" placeholder="Buscar por nome..." value="{{ termo_busca }}">
+            <button class="btn btn-primary btn-sm" type="submit">Buscar</button>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if epis %}
+                {% for epi in epis %}
+                    <tr>
+                        <td>{{ epi.nome }}</td>
+                        <td>{{ epi.quantidade }}</td>
+                        <td>{{ epi.valor }}</td>
+                        <td>
+                            <a href="{% url 'deletar_epi' epi.id_epi %}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar este Epi?');">Deletar</a>
+                            <a href="{% url 'editar_epi' epi.id_epi %}" class="btn btn-primary btn-sm">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Nenhum Epi encontrado.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

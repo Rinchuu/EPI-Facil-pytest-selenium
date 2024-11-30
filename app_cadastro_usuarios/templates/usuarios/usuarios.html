@@ -1,0 +1,44 @@
+{% extends 'usuarios/base.html' %}
+<title>Usuarios!</title>
+{% block conteudo %}
+<div class="container">
+    <h1>Lista de Usuários</h1>
+
+    <form method="GET" action="{% url 'listar_usuarios' %}">
+        <div class="input-group mb-3">
+            <input type="text" name="busca" class="form-control" placeholder="Buscar por nome ou email..." value="{{ termo_busca }}">
+            <button class="btn btn-primary btn-sm" type="submit">Buscar</button>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nivel</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if usuarios %}
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.nivel_usuario }}</td>
+                        <td>{{ usuario.nome }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>
+                            <a href="{% url 'deletar_usuario' usuario.id_usuario %}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar este usuário?');">Deletar</a>
+                            <a href="{% url 'editar_usuario' usuario.id_usuario %}" class="btn btn-primary btn-sm">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Nenhum usuário encontrado.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

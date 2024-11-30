@@ -1,0 +1,39 @@
+{% extends 'usuarios/base.html' %}
+<title>Cadastro!</title>
+{% block conteudo %}
+<div class="container">
+    <div class="login-box">
+        <form action="{% url 'usuarios' %}" method="post">
+            {% csrf_token %}
+            <div style="text-align: center;" class='container'>
+                <h1 style="color: white; text-decoration: underline; text-align: left; margin-left: 0;">Cadastro de Usúario</h1>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{% if message.tags %} {{ message.tags }} {% endif %}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="mb-3" style="text-align: left; margin-left: 0; font-size: 14px ">
+                    <label for="nome" class="form-label">Nome:</label>
+                    <input type="text" class="form-control" name="nome" required>
+                </div>
+
+                <div class="mb-3" style="text-align: left; margin-left: 0; font-size: 14px ">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+
+                <div class="mb-3" style="text-align: left; margin-left: 0; font-size: 14px ">
+                    <label for="senha" class="form-label">Senha:</label>
+                    <input type="password" class="form-control" name="senha" required>
+                </div>
+
+
+                <button class="login-btn" type="submit">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

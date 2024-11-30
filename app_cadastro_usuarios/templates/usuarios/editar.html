@@ -1,0 +1,36 @@
+{% extends 'usuarios/base.html' %}
+{% block conteudo %}
+<div class="container mt-5">
+    <h1>Editar Usuário</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" value="{{ usuario.nome }}" required>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="{{ usuario.email }}" required>
+
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" value="{{ usuario.senha }}" required>
+
+        <label for="nivel_usuario">Nivel de conta:</label>
+        <select name="nivel_usuario" required>
+            <option value="Administrador" {% if usuario.nivel_usuario == 'Administrador' %}selected{% endif %}>Administrador</option>
+            <option value="Cliente" {% if usuario.nivel_usuario == 'Cliente' %}selected{% endif %}>Cliente</option>
+        </select>
+        
+        <button type="submit" class="btn btn-danger btn-sm">Salvar</button>
+    </form>
+
+    
+    <a href="{% url 'listar_usuarios' %}">Voltar para a lista de usuários</a>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{% if message.tags %} {{ message.tags }} {% endif %}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}

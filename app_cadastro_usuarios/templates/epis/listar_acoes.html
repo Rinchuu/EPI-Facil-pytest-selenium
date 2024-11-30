@@ -1,0 +1,30 @@
+{% extends 'usuarios/base.html' %}
+{% block conteudo %}
+<h1 style="color: white; text-decoration: underline; text-align: left; margin-left: 0;">Lista de Ações</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Colaborador</th>
+            <th>Data</th>
+            <th>Equipamento</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if acoes %}
+        <ul>
+            {% for acao in acoes %}
+                <tr>
+                    <td>{{ acao.usuario }}</td> - {{ acao.descricao }}
+                    <td>{{ acao.data_acao|date:"d/m/Y H:i"  }}</td>
+                    <td>{{ acao.nome_equipamento }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Nenhum Ação Registrada.</td>
+                </tr>
+            {% endif %}
+        </ul>
+    </tbody>
+</table>
+{% endblock %}
